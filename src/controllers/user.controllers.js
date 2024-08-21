@@ -1,5 +1,7 @@
 const catchError = require('../utils/catchError');
 const User = require('../models/User');
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const getAll = catchError(async(req, res) => {
     const results = await User.findAll();
@@ -28,9 +30,32 @@ const update = catchError(async(req, res) => {
     return res.json(result[1][0]);
 });
 
+//recibiendo del body el email y password
+const login = catchError(async (req, res) => {
+    const { email, password } = req.body
+// byscando el email del body con where la clave es igual al valor queda igual ejem: email
+    const user = await User.findOne({ where: { email } })
+//hacemos las validaciones respondiendo con un mensaje
+    if (!user) return res.status(401).json({
+        message: "User not found"
+    })
+
+    const isValid = await bcrypt.compare(password, user.password)
+    if (!isValid) return res.sendStatus(401)
+
+    const token = jwt.sign(
+        { user },
+        process.env.TOKEN_SECRET,
+        { expiresIn: '1d' }
+    )
+
+    return res.json({user, token})
+})
+
 module.exports = {
     getAll,
     create,
     remove,
-    update
+    update,
+    login
 }
