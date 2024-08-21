@@ -1,0 +1,1 @@
+const User = require("./User") //importamos el modelo de user

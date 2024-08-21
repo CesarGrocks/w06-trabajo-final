@@ -43,9 +43,10 @@ const login = catchError(async (req, res) => {
     const isValid = await bcrypt.compare(password, user.password)
     if (!isValid) return res.sendStatus(401)
 
+        //generando un JSON webtoken 
     const token = jwt.sign(
         { user },
-        process.env.TOKEN_SECRET,
+        process.env.TOKEN_SECRET, //firma del token secreto
         { expiresIn: '1d' }
     )
 
