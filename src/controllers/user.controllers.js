@@ -22,6 +22,11 @@ const remove = catchError(async(req, res) => {
 
 const update = catchError(async(req, res) => {
     const { id } = req.params;
+//campos que no se deben actualizar, hacerlo con for each
+    delete req.body.password
+    delete req.body.email
+    delete req.body.phone
+
     const result = await User.update(
         req.body,
         { where: {id}, returning: true }
@@ -31,9 +36,11 @@ const update = catchError(async(req, res) => {
 });
 
 //recibiendo del body el email y password
+
 const login = catchError(async (req, res) => {
     const { email, password } = req.body
 // byscando el email del body con where la clave es igual al valor queda igual ejem: email
+
     const user = await User.findOne({ where: { email } })
 //hacemos las validaciones respondiendo con un mensaje
     if (!user) return res.status(401).json({
