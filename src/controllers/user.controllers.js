@@ -60,6 +60,8 @@ const login = catchError(async (req, res) => {
     return res.json({user, token})
 })
 
+//hacer controlador loged de usuario
+
 module.exports = {
     getAll,
     create,
