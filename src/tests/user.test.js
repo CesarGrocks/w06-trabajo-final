@@ -49,6 +49,8 @@ test("POST -> BASE_URL, should return statusCode 201, and res.body.firstName ===
      expect(res.body.firstName).toBe(user.firstName)
 })
 
+
+//GET GetAll
 test("GET -> BASE_URL, should return statusCode 200, and res.body.length === 2", async () => {
 
     const res = await request(app)
@@ -61,7 +63,7 @@ expect(res.body).toHaveLength(2)
 
 })
 
-//put
+//PUT Update
 test("PUT -> 'BASE_URL/:ID', should return statusCode 200, and res.body.firstName === userUpdate.firstName", async () => {
 
     const userUpdate = {
@@ -99,6 +101,7 @@ test("POST -> 'BASE_URL/LOGIN' should return status code 200, and res.body.user.
     
 })
 
+//POST login error
 test("POST -> 'BASE_URL/LOGIN' should return status code 200, and res.body.user.email === user.email", async() => {
  
     const hits = {
@@ -114,11 +117,15 @@ test("POST -> 'BASE_URL/LOGIN' should return status code 200, and res.body.user.
 
 })
 
+//DELETE
 test("DELETE -> 'BASE_URL/:ID', should return statusCode 204", async() => {
  
    const res = await request(app)
      .delete(`${BASE_URL}/${userId}`)
      .set('Authorization', `Bearer ${TOKEN}`)
+
+
      expect(res.statusCode).toBe(204)
+     expect(res.body).toBeDefined()
 
 })

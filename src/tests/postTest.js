@@ -1,5 +1,6 @@
 require('../models')
 const sequelize = require("../utils/connection");
+const userCreate = require('./createData/userCreate');
 
 const testMigrate = async()=>{
 
