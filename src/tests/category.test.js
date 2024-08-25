@@ -1,11 +1,12 @@
-require('../models')
+
 const request  = require("supertest")
 const app = require('../app')
 
-let TOKEN
-let categoryId
+// let TOKEN
+let categoryId //declaramos la variable de categoryId
 
 const BASE_URL = '/api/v1/categories'
+const BASE_URL_LOGIN = '/api/v1/users/login'; //permanece constante
 
 const category = {
     name: "Tv"
@@ -13,18 +14,19 @@ const category = {
 
 //obteniendo hits  (token antes de las pruebas)
 beforeAll(async () => {
-    const BASE_URL2 = '/api/v1/users'
     const user = {
         email: "angus@gmail.com",
         password: "angus1234"
     }
 
     const res = await request(app)
-       .post(`${BASE_URL2}/login`)
+       .post(BASE_URL_LOGIN) //y mantenemos constante
        .send(user)
 
-       TOKEN = res.body.token;
+       TOKEN = res.body.token; //obtenemos el token
+    // console.log(TOKEN) para comprobar
 
+  
 })
 
 //POST Create🔒
@@ -35,10 +37,10 @@ test("POST -> BASE_URL, should return statusCode 201, and res.body.name === cate
          .send(category)
          .set('Authorization', `Bearer ${TOKEN}`)
 
+         categoryId = res.body.id  //variable categoryId declarada arriba para poder identificar
 
          expect(res.statusCode).toBe(201)
          expect(res.body).toBeDefined()
-         expect(res.body.name).toBeDefined()
          expect(res.body.name).toBe(category.name)
 
 })
@@ -48,8 +50,8 @@ test("GET --> BASE_URL, should return statusCode 200, and res.body.length === 1"
 
  const res = await request(app)
        .get(BASE_URL)
-    
-
+       //console.log(res.body)
+         
        expect(res.statusCode).toBe(200)
        expect(res.body).toBeDefined()
        expect(res.body).toHaveLength(1)
