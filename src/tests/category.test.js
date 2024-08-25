@@ -8,7 +8,7 @@ let categoryId
 const BASE_URL = '/api/v1/categories'
 
 const category = {
-    name: "Television"
+    name: "Tv"
 }
 
 //obteniendo hits  (token antes de las pruebas)
