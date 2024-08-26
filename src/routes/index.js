@@ -6,7 +6,7 @@ const router = express.Router();
 
 // colocar las rutas aquí
 router.use('/users', routerUser)
-router.use('/categories', routerCategory);
+router.use("/categories", routerCategory); //doblescomillas
 router.use('/products', routerProduct);
 
 module.exports = router;

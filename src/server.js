@@ -1,4 +1,4 @@
-require('./models')
+require('./models') //contiene las relaciones 
 const app = require('./app');
 const sequelize = require('./utils/connection');
 

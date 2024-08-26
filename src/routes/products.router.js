@@ -6,7 +6,7 @@ const routerProduct = express.Router();
 
 routerProduct.route('/')
     .get(getAll)
-    .post(verifyJwt, create);//🔒
+    .post(verifyJwt, create);//🔒 todos las rutas privadas se le agrega el middleware: verifyJwt
 
 routerProduct.route('/:id')
     .get(getOne)

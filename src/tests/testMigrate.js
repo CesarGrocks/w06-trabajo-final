@@ -6,7 +6,7 @@ const userCreate = require('./createData/userCreate');
 const testMigrate = async()=>{
 
     try{
-        await sequelize.sync({force:true})
+        await sequelize.sync({ force:true})
         console.log('DB reset ✅');
         await userCreate() //introducimos un usuario
         process.exit()

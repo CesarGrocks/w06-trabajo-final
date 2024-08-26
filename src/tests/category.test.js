@@ -8,9 +8,7 @@ let categoryId //declaramos la variable de categoryId
 const BASE_URL = '/api/v1/categories'
 const BASE_URL_LOGIN = '/api/v1/users/login'; //permanece constante
 
-const category = {
-    name: "Tv"
-}
+
 
 //obteniendo hits  (token antes de las pruebas)
 beforeAll(async () => {
@@ -24,13 +22,14 @@ beforeAll(async () => {
        .send(user)
 
        TOKEN = res.body.token; //obtenemos el token
-    // console.log(TOKEN) para comprobar
-
-  
+    // console.log(TOKEN) para comproba
 })
+const category = {
+    name: "Tv"
+}
 
 //POST Create🔒
-test("POST -> BASE_URL, should return statusCode 201, and res.body.name === category.name", async () => {
+test("POST -> BASE_URL, should return statusCode 201, res.body.name === category.name", async () => {
 
   const res = await request(app)
          .post(BASE_URL)

@@ -1,13 +1,13 @@
 require('../models')
 const sequelize = require("../utils/connection");
-const userCreate = require('./createData/userCreate');
+// const userCreate = require('./createData/userCreate');
 
 const testMigrate = async()=>{
 
     try{
         await sequelize.sync({force:true}) //limpia la base de datos con el force true
         console.log('DB reset ✅');
-        await userCreate() //introducimos un usuario
+        // await userCreate() //introducimos un usuario
         process.exit()
     }catch(error){
         console.error(error);
