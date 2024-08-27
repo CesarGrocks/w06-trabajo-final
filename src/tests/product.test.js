@@ -21,19 +21,30 @@ beforeAll(async () => {
            .send(hits)
 
 TOKEN = res.body.token 
-//console.log(TOKEN)
+// console.log(TOKEN)
 
 //generando categoria
-const category = await Category.create({ name: 'speakers' })
+const category = await Category.create({ name: 'headphones' })
   product = {
-    title: 'Tv',
-    description: 'easy access to your favorite apps',
-    price: 250,
+    title: 'JBL',
+    description: 'the best of the best',
+    price: 390,
     categoryId: category.id
 }
 
 })
 
 test("POST -> 'BASE_URL', should return statusCode 201, and res.body.title === product.title", async () => {
- 
+ //console.log(TOKEN);
+
+const res = await request(app)
+  .post(BASE_URL)
+  .send(product)
+  .set('Authorization', `Bearer ${TOKEN}`)
+
+  expect(res.status).toBe(201)
+  expect(res.body).toBeDefined()
+  expect(res.body.title).toBe(product.title)
+  expect(res.body.categoryId).toBe(category.id)
+console.log(TOKEN);
 })

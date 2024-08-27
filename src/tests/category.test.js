@@ -25,12 +25,12 @@ beforeAll(async () => {
     // console.log(TOKEN) para comproba
 })
 const category = {
-    name: "Tv"
+    name: "headphones"
 }
 
 //POST Create🔒
 test("POST -> BASE_URL, should return statusCode 201, res.body.name === category.name", async () => {
-
+//console.log(TOKEN);
   const res = await request(app)
          .post(BASE_URL)
          .send(category)
@@ -57,7 +57,8 @@ test("GET --> BASE_URL, should return statusCode 200, and res.body.length === 1"
 })
 
 //DELTE Delete🔒
-test("DELETE --> BASE_URL, should return status 204", async () => {
+test("DELETE --> BASE_URL/categoryId, should return statusCode 204, and res.body.name === category.name",  async () => {
+    //console.log(categoryId);
     const res = await request(app)
         .delete(`${BASE_URL}/${categoryId}`)
         .set('Authorization', `Bearer ${TOKEN}`)
