@@ -1,4 +1,4 @@
-require('../models')
+require('../models') // traer el model nos ayuda con categoryId
 const request = require("supertest")
 const app = require('../app')
 const Category = require("../models/Category")
@@ -28,6 +28,8 @@ TOKEN = res.body.token
 
 //generando categoria
     category = await Category.create({ name: 'headphones' })
+
+    //declaramos product fuera del hook al inicio
     product = {
     title: 'JBL',
     description: 'the best of the best',
@@ -65,5 +67,21 @@ const res = await request(app)
 
 //   expect(res.body.title).toBe(product.title)
 //   expect(res.body.categoryId).toBe(category.id)
+
+})
+
+test("GET -> 'BASE_URL, should return status code 200, and res.body.length === 1", async () => {
+
+const res = await request(app)
+   .get(BASE_URL)
+   
+  console.log(res.body)
+
+   expect(res.status).toBe(200)
+   expect(res.body).toBeDefined()
+   expect(res.body).toHaveLength(1)
+
+   expect(res.body[0].category.id).toBeDefined()
+   expect(res.body[0].category.id).toBe(category.id)
 
 })
