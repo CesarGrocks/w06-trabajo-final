@@ -11,7 +11,7 @@ const getAll = catchError(async(req, res) => {
         include: [
             {
                 model: Product,
-                attributes: { exclude: ['updateAt', 'createAt' ] }, //elegimos que atributos excluir de modelo products
+                attributes: { exclude: ['updatedAt', 'createdAt' ] }, //elegimos que atributos excluir de modelo products
                 include: [                                           // elegimos cuales incluir en modelo category
                     {
                         model: Category,
@@ -45,7 +45,7 @@ const getOne = catchError(async(req, res) => {
             include: [
                 {
                     model: Product,
-                    attributes: { exclude: ['updateAt', 'createAt' ] }, //elegimos que atributos excluir de modelo products
+                    attributes: { exclude: ['updatedAt', 'createdAt' ] }, //elegimos que atributos excluir de modelo products
                     include: [                                           // elegimos cuales incluir en modelo category
                         {
                             model: Category,
